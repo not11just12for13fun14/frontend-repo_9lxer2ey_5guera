@@ -11,6 +11,8 @@ import FAQ from './components/FAQ'
 import FinalCTA from './components/FinalCTA'
 import Footer from './components/Footer'
 import LeadCaptureModals from './components/LeadCaptureModals'
+import MagicBackground from './components/MagicBackground'
+import ParallaxSections from './components/ParallaxSections'
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -20,7 +22,9 @@ function App() {
   const openDemo = () => { setModalType('demo'); setModalOpen(true) }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white text-gray-900 relative">
+      <MagicBackground />
+      <ParallaxSections />
       <NavBar onOpenWaitlist={openWaitlist} onOpenDemo={openDemo} />
       <Hero onOpenWaitlist={openWaitlist} onOpenDemo={openDemo} />
       <ProblemOpportunity />
