@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import LeadCaptureModals from './components/LeadCaptureModals'
 import MagicBackground from './components/MagicBackground'
 import ParallaxSections from './components/ParallaxSections'
+import StorybookScroll from './components/StorybookScroll'
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -28,6 +29,8 @@ function App() {
       <NavBar onOpenWaitlist={openWaitlist} onOpenDemo={openDemo} />
       <Hero onOpenWaitlist={openWaitlist} onOpenDemo={openDemo} />
       <ProblemOpportunity />
+      {/* New storybook scroll gallery to add more imagery between sections */}
+      <StorybookScroll />
       <HowItWorks />
       <Features />
       <SocialProof />
