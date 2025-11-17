@@ -2,6 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 export default function DemoReel() {
+  const fallbackSrc = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-6 md:px-12">
@@ -21,8 +23,24 @@ export default function DemoReel() {
             className="flex-1 w-full"
           >
             <div className="aspect-video w-full rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
-              <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                onError={(e) => {
+                  const video = e.currentTarget
+                  if (video.dataset.fallbackApplied !== 'true') {
+                    video.src = fallbackSrc
+                    video.dataset.fallbackApplied = 'true'
+                    video.play().catch(() => {})
+                  }
+                }}
+              >
                 <source src="/sample.mp4" type="video/mp4" />
+                <source src={fallbackSrc} type="video/mp4" />
               </video>
             </div>
           </motion.div>

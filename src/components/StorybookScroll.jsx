@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion'
 
 // A sticky, scroll-driven story strip that crossfades illustration frames
 // to feel like pages turning in a picture book as the user scrolls.
@@ -38,6 +38,9 @@ export default function StorybookScroll() {
   const tilt = useTransform(scrollYProgress, [0, 1], ['-2deg', '2deg'])
   const glow = useTransform(scrollYProgress, [0, 0.5, 1], [0.25, 0.45, 0.3])
 
+  // Use a motion template string for boxShadow (avoids calling .to on MotionValue)
+  const boxShadow = useMotionTemplate`inset 0 0 220px rgba(255,255,200,${glow})`
+
   return (
     <section ref={ref} className="relative py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-12">
@@ -55,9 +58,9 @@ export default function StorybookScroll() {
 
                 {/* Decorative soft vignette + glow */}
                 <motion.div
-          aria-hidden
+                  aria-hidden
                   className="pointer-events-none absolute inset-0"
-                  style={{ boxShadow: glow.to(v => `inset 0 0 220px rgba(255,255,200,${v})`) }}
+                  style={{ boxShadow }}
                 />
 
                 {/* Subtle page shine across top edge */}
